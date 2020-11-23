@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClipboardCleaner", "WindowsApplication1\ClipboardCleaner.vbproj", "{55D58315-3DD5-4883-BC73-2B0B82DDE1BF}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClipboardHistory", "WindowsApplication1\ClipboardHistory.vbproj", "{55D58315-3DD5-4883-BC73-2B0B82DDE1BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7120350C-02FB-4F41-85F1-AFFEF9610CEC}
 	EndGlobalSection
 EndGlobal

@@ -10,10 +10,10 @@ Imports System.Runtime.InteropServices
 
 ' Die Werte der Assemblyattribute überprüfen
 
-<Assembly: AssemblyTitle("ClipboardCleaner")> 
-<Assembly: AssemblyDescription("Ein Programm das Sich in das Systemmenü neben der Uhr einpflanzt und nichts kann als die Zwischenablage zu leeren")> 
-<Assembly: AssemblyCompany("Marc Bender")> 
-<Assembly: AssemblyProduct("ClipboardCleaner")> 
+<Assembly: AssemblyTitle("ClipboardHistory")>
+<Assembly: AssemblyDescription("Ein Programm das Sich in das Systemmenü neben der Uhr einpflanzt und nichts kann als einen Zwischenablageverlauf zu generieren")>
+<Assembly: AssemblyCompany("Marc Bender")>
+<Assembly: AssemblyProduct("ClipboardHistory")>
 <Assembly: AssemblyCopyright("")> 
 <Assembly: AssemblyTrademark("")> 
 
