@@ -2,6 +2,29 @@
 Public Class MainWindow
     ReadOnly timeout As Integer = 15 * 1000
     Dim clipboardText As String
+
+    Private Declare Function RegisterHotKey Lib "user32" (ByVal hWnd As IntPtr, ByVal id As Integer, ByVal fsModifier As Integer, ByVal vk As Integer) As Integer
+    Private Declare Sub UnregisterHotKey Lib "user32" (ByVal hWnd As IntPtr, ByVal id As Integer)
+    Private Const Key_NONE As Integer = &H0
+    Private Const Key_ALT As Integer = &H1
+    Private Const Key_CTRL As Integer = &H2
+    Private Const Key_SHIFT As Integer = &H4
+    Private Const Key_WIN As Integer = &H8
+    Private Const WM_HOTKEY As Integer = &H312
+
+    Protected Overrides Sub WndProc(ByRef m As Message)
+        If m.Msg = WM_HOTKEY Then
+            Select Case m.WParam
+                Case 1 ' multiple hotkeys possible but only one needed yet
+                    Me.Visible = True
+                    Me.BringToFront()
+                    Me.Activate()
+            End Select
+        End If
+        MyBase.WndProc(m)
+    End Sub
+
+
     Private Sub clearClipboard()
         Clipboard.Clear()
         NotifyIcon1.BalloonTipText = "Zwischenablage geleert"
@@ -26,7 +49,6 @@ Public Class MainWindow
             Me.Visible = True
             Me.BringToFront()
             Me.Activate()
-
         ElseIf e.Button = MouseButtons.Middle Then
             paste(HistoryViewerListBox.Items.Item(0))
         Else
@@ -38,6 +60,7 @@ Public Class MainWindow
         Me.CB_autoHide.Checked = My.Settings.autoHideOn
         Me.CB_alwaysInForeground.Checked = My.Settings.alwaysOnTop
         Me.TopMost = My.Settings.alwaysOnTop
+        RegisterHotKey(Me.Handle, 1, Key_CTRL, Keys.F12)
         If My.Settings.autoHideOn = True Then
             Me.Visible = False
             Me.MinimizeBox = False
@@ -55,6 +78,7 @@ Public Class MainWindow
     End Sub
     Private Sub MainWindow_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
         My.Settings.Save()
+        UnregisterHotKey(Me.Handle, 1)
     End Sub
     Private Sub EndButton_Click(sender As Object, e As EventArgs) Handles EndButton.Click
         NotifyIcon1.Visible = False
