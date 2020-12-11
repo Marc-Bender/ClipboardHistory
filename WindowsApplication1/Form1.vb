@@ -1,7 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Public Class MainWindow
     ReadOnly timeout As Integer = 15 * 1000
-    Dim autoHideOn As Boolean = My.Settings.autoHideOn
     Dim clipboardText As String
     Private Sub clearClipboard()
         Clipboard.Clear()
@@ -26,6 +25,8 @@ Public Class MainWindow
         If e.Button = MouseButtons.Left Then
             Me.Visible = True
             Me.BringToFront()
+            Me.Activate()
+
         ElseIf e.Button = MouseButtons.Middle Then
             paste(HistoryViewerListBox.Items.Item(0))
         Else
@@ -34,29 +35,29 @@ Public Class MainWindow
     End Sub
 
     Private Sub MainWindow_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        If autoHideOn = True Then
+        Me.CB_autoHide.Checked = My.Settings.autoHideOn
+        Me.CB_alwaysInForeground.Checked = My.Settings.alwaysOnTop
+        Me.TopMost = My.Settings.alwaysOnTop
+        If My.Settings.autoHideOn = True Then
             Me.Visible = False
             Me.MinimizeBox = False
             Me.ControlBox = False
-            Me.CB_autoHide.Checked = True
         Else
             Me.ControlBox = True
             Me.MinimizeBox = True
-            Me.CB_autoHide.Checked = False
         End If
-        Me.TopMost = My.Settings.alwaysOnTop
-        Me.CB_alwaysInForeground.Checked = Me.TopMost
     End Sub
 
     Private Sub MainWindow_FocusLost(sender As Object, e As EventArgs) Handles Me.Deactivate
-        If autoHideOn = True Then
+        If My.Settings.autoHideOn = True Then
             Me.Visible = False
         End If
     End Sub
-
+    Private Sub MainWindow_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
+        My.Settings.Save()
+    End Sub
     Private Sub EndButton_Click(sender As Object, e As EventArgs) Handles EndButton.Click
         NotifyIcon1.Visible = False
-        My.Settings.Save()
         End
     End Sub
 
@@ -127,14 +128,24 @@ Public Class MainWindow
     End Sub
 
     Private Sub CB_alwaysInForeground_CheckedChanged(sender As Object, e As EventArgs) Handles CB_alwaysInForeground.CheckedChanged
-        Me.TopMost = Not Me.TopMost
-        My.Settings.alwaysOnTop = Me.TopMost
+        Me.TopMost = CB_alwaysInForeground.Checked
+        My.Settings.alwaysOnTop = CB_alwaysInForeground.Checked
+        My.Settings.Save()
     End Sub
 
     Private Sub CB_autoHide_CheckedChanged(sender As Object, e As EventArgs) Handles CB_autoHide.CheckedChanged
-        autoHideOn = Not autoHideOn
-        My.Settings.autoHideOn = autoHideOn
-        Me.MinimizeBox = Not Me.MinimizeBox
-        Me.ControlBox = Not Me.ControlBox
+        My.Settings.autoHideOn = CB_autoHide.Checked
+        If CB_autoHide.Checked = True Then
+            My.Settings.alwaysOnTop = False
+            Me.CB_alwaysInForeground.Enabled = False
+            Me.CB_alwaysInForeground.Checked = False
+            Me.MinimizeBox = False
+            Me.ControlBox = False
+        Else
+            Me.CB_alwaysInForeground.Enabled = True
+            Me.MinimizeBox = True
+            Me.ControlBox = True
+        End If
+        My.Settings.Save()
     End Sub
 End Class
