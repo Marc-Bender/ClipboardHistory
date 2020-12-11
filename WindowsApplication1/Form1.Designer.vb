@@ -29,10 +29,13 @@ Partial Class MainWindow
         Me.EndButton = New System.Windows.Forms.ToolStripMenuItem()
         Me.VerlaufLeerenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ZwischenablageLeerenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SelektorAnzeigenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClearHistoryButton = New System.Windows.Forms.Button()
         Me.ClearClipboardButton = New System.Windows.Forms.Button()
         Me.HistoryViewerListBox = New System.Windows.Forms.ListBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.CB_alwaysInForeground = New System.Windows.Forms.CheckBox()
+        Me.CB_autoHide = New System.Windows.Forms.CheckBox()
         Me.NotificationBarContextMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -40,14 +43,14 @@ Partial Class MainWindow
         '
         Me.NotifyIcon1.ContextMenuStrip = Me.NotificationBarContextMenu
         Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
-        Me.NotifyIcon1.Text = "ClipboardCleaner"
+        Me.NotifyIcon1.Text = "ClipboardHistory"
         Me.NotifyIcon1.Visible = True
         '
         'NotificationBarContextMenu
         '
-        Me.NotificationBarContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EndButton, Me.VerlaufLeerenToolStripMenuItem, Me.ZwischenablageLeerenToolStripMenuItem})
+        Me.NotificationBarContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VerlaufLeerenToolStripMenuItem, Me.ZwischenablageLeerenToolStripMenuItem, Me.SelektorAnzeigenToolStripMenuItem, Me.EndButton})
         Me.NotificationBarContextMenu.Name = "NotificationBarContextMenu"
-        Me.NotificationBarContextMenu.Size = New System.Drawing.Size(195, 70)
+        Me.NotificationBarContextMenu.Size = New System.Drawing.Size(195, 92)
         '
         'EndButton
         '
@@ -66,6 +69,12 @@ Partial Class MainWindow
         Me.ZwischenablageLeerenToolStripMenuItem.Name = "ZwischenablageLeerenToolStripMenuItem"
         Me.ZwischenablageLeerenToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.ZwischenablageLeerenToolStripMenuItem.Text = "Zwischenablage leeren"
+        '
+        'SelektorAnzeigenToolStripMenuItem
+        '
+        Me.SelektorAnzeigenToolStripMenuItem.Name = "SelektorAnzeigenToolStripMenuItem"
+        Me.SelektorAnzeigenToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.SelektorAnzeigenToolStripMenuItem.Text = "Selektor Anzeigen"
         '
         'ClearHistoryButton
         '
@@ -97,27 +106,49 @@ Partial Class MainWindow
         '
         Me.Timer1.Enabled = True
         '
+        'CB_alwaysInForeground
+        '
+        Me.CB_alwaysInForeground.AutoSize = True
+        Me.CB_alwaysInForeground.Location = New System.Drawing.Point(12, 145)
+        Me.CB_alwaysInForeground.Name = "CB_alwaysInForeground"
+        Me.CB_alwaysInForeground.Size = New System.Drawing.Size(128, 17)
+        Me.CB_alwaysInForeground.TabIndex = 5
+        Me.CB_alwaysInForeground.Text = "Immer im Vordergrund"
+        Me.CB_alwaysInForeground.UseVisualStyleBackColor = True
+        '
+        'CB_autoHide
+        '
+        Me.CB_autoHide.AutoSize = True
+        Me.CB_autoHide.Location = New System.Drawing.Point(168, 145)
+        Me.CB_autoHide.Name = "CB_autoHide"
+        Me.CB_autoHide.Size = New System.Drawing.Size(148, 17)
+        Me.CB_autoHide.TabIndex = 6
+        Me.CB_autoHide.Text = "Automatisch ausblenden?"
+        Me.CB_autoHide.UseVisualStyleBackColor = True
+        '
         'MainWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(320, 149)
+        Me.ClientSize = New System.Drawing.Size(320, 181)
         Me.ControlBox = False
+        Me.Controls.Add(Me.CB_autoHide)
+        Me.Controls.Add(Me.CB_alwaysInForeground)
         Me.Controls.Add(Me.HistoryViewerListBox)
         Me.Controls.Add(Me.ClearClipboardButton)
         Me.Controls.Add(Me.ClearHistoryButton)
         Me.DoubleBuffered = True
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(336, 188)
+        Me.MaximumSize = New System.Drawing.Size(336, 220)
         Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(336, 188)
+        Me.MinimumSize = New System.Drawing.Size(336, 220)
         Me.Name = "MainWindow"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.Text = "Clipboard History"
-        Me.TopMost = True
         Me.NotificationBarContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
@@ -128,5 +159,8 @@ Partial Class MainWindow
     Friend WithEvents ClearClipboardButton As Button
     Friend WithEvents HistoryViewerListBox As ListBox
     Friend WithEvents ZwischenablageLeerenToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents Timer1 As Timer
+    Friend WithEvents Timer1 As System.Windows.Forms.Timer
+    Friend WithEvents SelektorAnzeigenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CB_alwaysInForeground As CheckBox
+    Friend WithEvents CB_autoHide As CheckBox
 End Class

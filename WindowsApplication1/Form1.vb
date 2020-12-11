@@ -1,34 +1,62 @@
-﻿Public Class MainWindow
+﻿Imports System.Runtime.InteropServices
+Public Class MainWindow
     ReadOnly timeout As Integer = 15 * 1000
+    Dim autoHideOn As Boolean = My.Settings.autoHideOn
     Dim clipboardText As String
     Private Sub clearClipboard()
         Clipboard.Clear()
-        NotifyIcon1.BalloonTipText = "Zwischenablage wurde geleert"
+        NotifyIcon1.BalloonTipText = "Zwischenablage geleert"
         NotifyIcon1.ShowBalloonTip(timeout)
     End Sub
 
     Private Sub clearHistory()
         HistoryViewerListBox.Items.Clear()
-        NotifyIcon1.BalloonTipText = "Zwischenablage verlauf geleert"
+        NotifyIcon1.BalloonTipText = "Zwischenablageverlauf geleert"
         NotifyIcon1.ShowBalloonTip(timeout)
     End Sub
 
-    Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseClick
-        Me.Visible = True
+    Private Sub paste(textToPaste As String)
+        Clipboard.SetText(textToPaste)
+        My.Computer.Keyboard.SendKeys("%{TAB}")
+        Threading.Thread.Sleep(100) 'ms
+        My.Computer.Keyboard.SendKeys("+{INS}")
+    End Sub
+
+    Private Sub NotifyIcon1_MouseDown(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDown
+        If e.Button = MouseButtons.Left Then
+            Me.Visible = True
+            Me.BringToFront()
+        ElseIf e.Button = MouseButtons.Middle Then
+            paste(HistoryViewerListBox.Items.Item(0))
+        Else
+            ' do nothing
+        End If
     End Sub
 
     Private Sub MainWindow_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        Me.Visible = False
-        NotifyIcon1.BalloonTipText = "Start des Programms Clipboard History geschrieben von Marc Bender"
-        NotifyIcon1.ShowBalloonTip(timeout)
+        If autoHideOn = True Then
+            Me.Visible = False
+            Me.MinimizeBox = False
+            Me.ControlBox = False
+            Me.CB_autoHide.Checked = True
+        Else
+            Me.ControlBox = True
+            Me.MinimizeBox = True
+            Me.CB_autoHide.Checked = False
+        End If
+        Me.TopMost = My.Settings.alwaysOnTop
+        Me.CB_alwaysInForeground.Checked = Me.TopMost
     End Sub
 
     Private Sub MainWindow_FocusLost(sender As Object, e As EventArgs) Handles Me.Deactivate
-        Me.Visible = False
+        If autoHideOn = True Then
+            Me.Visible = False
+        End If
     End Sub
 
     Private Sub EndButton_Click(sender As Object, e As EventArgs) Handles EndButton.Click
         NotifyIcon1.Visible = False
+        My.Settings.Save()
         End
     End Sub
 
@@ -51,6 +79,16 @@
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         If (Clipboard.ContainsText And (Not Clipboard.GetText.Equals(clipboardText))) Then
             clipboardText = Clipboard.GetText
+            Try
+                For Each i As String In HistoryViewerListBox.Items.OfType(Of String)
+                    If i.Equals(clipboardText) Then
+                        HistoryViewerListBox.Items.RemoveAt(HistoryViewerListBox.Items.IndexOf(i))
+                        Exit For
+                    End If
+                Next
+
+            Catch ex As System.ArgumentNullException
+            End Try
             HistoryViewerListBox.Items.Insert(0, clipboardText)
         End If
     End Sub
@@ -65,13 +103,8 @@
             End Try
         End If
         If (e.Button = MouseButtons.Left) Then
-            Dim leftClickIndex As Integer = HistoryViewerListBox.IndexFromPoint(e.X, e.Y)
             Try
-                Dim textToPaste As String = HistoryViewerListBox.SelectedItem.ToString
-                Clipboard.SetText(textToPaste)
-                SendKeys.Send("%{TAB}")
-                Threading.Thread.Sleep(100) 'ms
-                SendKeys.Send("+{INS}")
+                paste(HistoryViewerListBox.SelectedItem.ToString)
             Catch ex As NullReferenceException
             End Try
         End If
@@ -79,19 +112,29 @@
 
     Private Sub HistoryViewerListBoxItem_Key(ByVal sender As Object, ByVal e As KeyEventArgs) Handles HistoryViewerListBox.KeyDown
         If (e.KeyCode = Keys.Delete) Then
-            HistoryViewerListBox.Items.RemoveAt(HistoryViewerListBox.SelectedIndex)
+            Try
+                HistoryViewerListBox.Items.RemoveAt(HistoryViewerListBox.SelectedIndex)
+            Catch ex As ArgumentOutOfRangeException
+            End Try
         End If
         If (e.KeyCode = Keys.Enter) Then
-            Dim textToPaste As String = HistoryViewerListBox.SelectedItem.ToString
-            Clipboard.SetText(textToPaste)
-            SendKeys.Send("%{TAB}")
-            Threading.Thread.Sleep(100) 'ms
-            SendKeys.Send("+{INS}")
+            paste(HistoryViewerListBox.SelectedItem.ToString)
         End If
     End Sub
 
-    Private Sub HideButton_Click(sender As Object, e As EventArgs)
-        Me.Visible = False
+    Private Sub SelektorAnzeigenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SelektorAnzeigenToolStripMenuItem.Click
+        Me.Visible = True
     End Sub
 
+    Private Sub CB_alwaysInForeground_CheckedChanged(sender As Object, e As EventArgs) Handles CB_alwaysInForeground.CheckedChanged
+        Me.TopMost = Not Me.TopMost
+        My.Settings.alwaysOnTop = Me.TopMost
+    End Sub
+
+    Private Sub CB_autoHide_CheckedChanged(sender As Object, e As EventArgs) Handles CB_autoHide.CheckedChanged
+        autoHideOn = Not autoHideOn
+        My.Settings.autoHideOn = autoHideOn
+        Me.MinimizeBox = Not Me.MinimizeBox
+        Me.ControlBox = Not Me.ControlBox
+    End Sub
 End Class

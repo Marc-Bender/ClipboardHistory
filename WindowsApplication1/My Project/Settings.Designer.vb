@@ -53,6 +53,30 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property alwaysOnTop() As Boolean
+            Get
+                Return CType(Me("alwaysOnTop"),Boolean)
+            End Get
+            Set
+                Me("alwaysOnTop") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property autoHideOn() As Boolean
+            Get
+                Return CType(Me("autoHideOn"),Boolean)
+            End Get
+            Set
+                Me("autoHideOn") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
