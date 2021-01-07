@@ -2,25 +2,25 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="alwaysOnTop" Type="System.Boolean" Scope="User">
+    <Setting Name="b_topMost" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="autoHideOn" Type="System.Boolean" Scope="User">
+    <Setting Name="b_autoHideOn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="HotkeyModifierCTRL_SET" Type="System.Boolean" Scope="User">
+    <Setting Name="b_HotkeyModifier_CTRL" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="HotkeyModifierALT_SET" Type="System.Boolean" Scope="User">
+    <Setting Name="b_HotkeyModifier_ALT" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="HotkeyModifierSHIFT_SET" Type="System.Boolean" Scope="User">
+    <Setting Name="b_HotkeyModifier_SHIFT" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="HotkeyModifierWIN_SET" Type="System.Boolean" Scope="User">
+    <Setting Name="b_HotkeyModifier_WIN" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="HotkeyKeyIndex" Type="System.UInt32" Scope="User">
+    <Setting Name="Uint_Hotkey_KeyIndex" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>

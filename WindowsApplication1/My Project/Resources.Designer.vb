@@ -61,20 +61,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Zwischenablage geleert ähnelt.
+        '''</summary>
+        Friend ReadOnly Property Str_ClipboardEmptied_DE() As String
+            Get
+                Return ResourceManager.GetString("Str_ClipboardEmptied_DE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Zwischenablageverlauf geleert ähnelt.
+        '''</summary>
+        Friend ReadOnly Property Str_HistoryEmptied_DE() As String
+            Get
+                Return ResourceManager.GetString("Str_HistoryEmptied_DE", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die https://www.github.com/Marc-Bender/ClipboardHistory/releases/latest ähnelt.
         '''</summary>
-        Friend ReadOnly Property UpdateURL() As String
+        Friend ReadOnly Property Str_UpdateURL() As String
             Get
-                Return ResourceManager.GetString("UpdateURL", resourceCulture)
+                Return ResourceManager.GetString("Str_UpdateURL", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die V.0.2 ähnelt.
         '''</summary>
-        Friend ReadOnly Property VersionNumberString() As String
+        Friend ReadOnly Property Str_VersionNumber() As String
             Get
-                Return ResourceManager.GetString("VersionNumberString", resourceCulture)
+                Return ResourceManager.GetString("Str_VersionNumber", resourceCulture)
             End Get
         End Property
     End Module
