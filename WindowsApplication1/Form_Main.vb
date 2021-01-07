@@ -41,7 +41,7 @@
     Private Sub helperFun_paste(textToPaste As String)
         Clipboard.SetText(textToPaste)
         My.Computer.Keyboard.SendKeys("%{TAB}")
-        Threading.Thread.Sleep(100) 'ms
+        Threading.Thread.Sleep(NumUD_DelayTime.Value) 'ms
         My.Computer.Keyboard.SendKeys("+{INS}")
     End Sub
 
@@ -79,6 +79,7 @@
             Me.MinimizeBox = True
         End If
 
+        Me.NumUD_DelayTime.Value = My.Settings.Uint_DelayTime
         Me.Lbl_CheckForUpdatesLink.Text = My.Resources.Str_UpdateURL
         Me.Lbl_CurrentVersionNumber.Text = My.Resources.Str_VersionNumber
     End Sub
@@ -295,4 +296,8 @@
         HelperFun_SetHotkey()
     End Sub
 
+    Private Sub NumUD_DelayTime_ValueChanged(sender As Object, e As EventArgs) Handles NumUD_DelayTime.ValueChanged
+        My.Settings.Uint_DelayTime = NumUD_DelayTime.Value
+        My.Settings.Save()
+    End Sub
 End Class

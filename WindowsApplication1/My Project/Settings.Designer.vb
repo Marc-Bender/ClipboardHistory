@@ -137,6 +137,18 @@ Namespace My
                 Me("Uint_Hotkey_KeyIndex") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("500")>  _
+        Public Property Uint_DelayTime() As UInteger
+            Get
+                Return CType(Me("Uint_DelayTime"),UInteger)
+            End Get
+            Set
+                Me("Uint_DelayTime") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

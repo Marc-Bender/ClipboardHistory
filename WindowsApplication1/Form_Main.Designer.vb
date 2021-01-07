@@ -36,7 +36,6 @@ Partial Class Form_Main
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.CB_topMost = New System.Windows.Forms.CheckBox()
         Me.CB_autoHide = New System.Windows.Forms.CheckBox()
-        Me.HotkeyValue = New System.Windows.Forms.Label()
         Me.Lbl_CheckForUpdatesLink = New System.Windows.Forms.LinkLabel()
         Me.ComB_Hotkey_Key = New System.Windows.Forms.ComboBox()
         Me.Btn_ChangeHotkey = New System.Windows.Forms.Button()
@@ -45,7 +44,10 @@ Partial Class Form_Main
         Me.CB_HotkeyModifiers_SHIFT = New System.Windows.Forms.CheckBox()
         Me.CB_HotkeyModifiers_ALT = New System.Windows.Forms.CheckBox()
         Me.CB_HotkeyModifiers_WIN = New System.Windows.Forms.CheckBox()
+        Me.Lbl_Delay = New System.Windows.Forms.Label()
+        Me.NumUD_DelayTime = New System.Windows.Forms.NumericUpDown()
         Me.NotificationBarContextMenu.SuspendLayout()
+        CType(Me.NumUD_DelayTime, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'NotifyIcon1
@@ -135,20 +137,9 @@ Partial Class Form_Main
         Me.CB_autoHide.Text = "Automatisch ausblenden?"
         Me.CB_autoHide.UseVisualStyleBackColor = True
         '
-        'HotkeyValue
-        '
-        Me.HotkeyValue.AutoSize = True
-        Me.HotkeyValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.HotkeyValue.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.HotkeyValue.Location = New System.Drawing.Point(195, 227)
-        Me.HotkeyValue.Name = "HotkeyValue"
-        Me.HotkeyValue.Size = New System.Drawing.Size(73, 15)
-        Me.HotkeyValue.TabIndex = 7
-        Me.HotkeyValue.Text = "*STRG + F12"
-        '
         'Lbl_CheckForUpdatesLink
         '
-        Me.Lbl_CheckForUpdatesLink.Location = New System.Drawing.Point(9, 222)
+        Me.Lbl_CheckForUpdatesLink.Location = New System.Drawing.Point(12, 242)
         Me.Lbl_CheckForUpdatesLink.Name = "Lbl_CheckForUpdatesLink"
         Me.Lbl_CheckForUpdatesLink.Size = New System.Drawing.Size(299, 32)
         Me.Lbl_CheckForUpdatesLink.TabIndex = 0
@@ -168,7 +159,7 @@ Partial Class Form_Main
         '
         Me.Btn_ChangeHotkey.Location = New System.Drawing.Point(9, 193)
         Me.Btn_ChangeHotkey.Name = "Btn_ChangeHotkey"
-        Me.Btn_ChangeHotkey.Size = New System.Drawing.Size(109, 23)
+        Me.Btn_ChangeHotkey.Size = New System.Drawing.Size(99, 23)
         Me.Btn_ChangeHotkey.TabIndex = 11
         Me.Btn_ChangeHotkey.Text = "Hotkey ändern"
         Me.Btn_ChangeHotkey.UseVisualStyleBackColor = True
@@ -176,7 +167,7 @@ Partial Class Form_Main
         'Lbl_CurrentVersionNumber
         '
         Me.Lbl_CurrentVersionNumber.AutoSize = True
-        Me.Lbl_CurrentVersionNumber.Location = New System.Drawing.Point(275, 203)
+        Me.Lbl_CurrentVersionNumber.Location = New System.Drawing.Point(9, 229)
         Me.Lbl_CurrentVersionNumber.Name = "Lbl_CurrentVersionNumber"
         Me.Lbl_CurrentVersionNumber.Size = New System.Drawing.Size(41, 13)
         Me.Lbl_CurrentVersionNumber.TabIndex = 12
@@ -222,12 +213,34 @@ Partial Class Form_Main
         Me.CB_HotkeyModifiers_WIN.Text = "WIN"
         Me.CB_HotkeyModifiers_WIN.UseVisualStyleBackColor = True
         '
+        'Lbl_Delay
+        '
+        Me.Lbl_Delay.AutoSize = True
+        Me.Lbl_Delay.Location = New System.Drawing.Point(114, 198)
+        Me.Lbl_Delay.Name = "Lbl_Delay"
+        Me.Lbl_Delay.Size = New System.Drawing.Size(89, 13)
+        Me.Lbl_Delay.TabIndex = 18
+        Me.Lbl_Delay.Text = "Verzögerung [ms]"
+        Me.Lbl_Delay.UseMnemonic = False
+        '
+        'NumUD_DelayTime
+        '
+        Me.NumUD_DelayTime.Location = New System.Drawing.Point(214, 196)
+        Me.NumUD_DelayTime.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.NumUD_DelayTime.Name = "NumUD_DelayTime"
+        Me.NumUD_DelayTime.Size = New System.Drawing.Size(94, 20)
+        Me.NumUD_DelayTime.TabIndex = 19
+        Me.NumUD_DelayTime.ThousandsSeparator = True
+        Me.NumUD_DelayTime.Value = New Decimal(New Integer() {500, 0, 0, 0})
+        '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(320, 251)
+        Me.ClientSize = New System.Drawing.Size(320, 281)
         Me.ControlBox = False
+        Me.Controls.Add(Me.NumUD_DelayTime)
+        Me.Controls.Add(Me.Lbl_Delay)
         Me.Controls.Add(Me.CB_HotkeyModifiers_WIN)
         Me.Controls.Add(Me.CB_HotkeyModifiers_ALT)
         Me.Controls.Add(Me.CB_HotkeyModifiers_SHIFT)
@@ -236,7 +249,6 @@ Partial Class Form_Main
         Me.Controls.Add(Me.Btn_ChangeHotkey)
         Me.Controls.Add(Me.ComB_Hotkey_Key)
         Me.Controls.Add(Me.Lbl_CheckForUpdatesLink)
-        Me.Controls.Add(Me.HotkeyValue)
         Me.Controls.Add(Me.CB_autoHide)
         Me.Controls.Add(Me.CB_topMost)
         Me.Controls.Add(Me.ListBox_RecentClipboardEntries)
@@ -245,12 +257,13 @@ Partial Class Form_Main
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(336, 290)
+        Me.MaximumSize = New System.Drawing.Size(336, 320)
         Me.MinimizeBox = False
-        Me.MinimumSize = New System.Drawing.Size(336, 290)
+        Me.MinimumSize = New System.Drawing.Size(336, 320)
         Me.Name = "Form_Main"
         Me.Text = "Clipboard History"
         Me.NotificationBarContextMenu.ResumeLayout(False)
+        CType(Me.NumUD_DelayTime, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -267,7 +280,6 @@ Partial Class Form_Main
     Friend WithEvents TSMItem_showSelector As ToolStripMenuItem
     Friend WithEvents CB_topMost As CheckBox
     Friend WithEvents CB_autoHide As CheckBox
-    Friend WithEvents HotkeyValue As Label
     Friend WithEvents Lbl_CheckForUpdatesLink As LinkLabel
     Friend WithEvents ComB_Hotkey_Key As ComboBox
     Friend WithEvents Btn_ChangeHotkey As Button
@@ -276,4 +288,6 @@ Partial Class Form_Main
     Friend WithEvents CB_HotkeyModifiers_SHIFT As CheckBox
     Friend WithEvents CB_HotkeyModifiers_ALT As CheckBox
     Friend WithEvents CB_HotkeyModifiers_WIN As CheckBox
+    Friend WithEvents Lbl_Delay As Label
+    Friend WithEvents NumUD_DelayTime As NumericUpDown
 End Class
