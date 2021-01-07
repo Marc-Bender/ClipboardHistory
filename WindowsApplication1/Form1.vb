@@ -5,11 +5,13 @@ Public Class MainWindow
 
     Private Declare Function RegisterHotKey Lib "user32" (ByVal hWnd As IntPtr, ByVal id As Integer, ByVal fsModifier As Integer, ByVal vk As Integer) As Integer
     Private Declare Sub UnregisterHotKey Lib "user32" (ByVal hWnd As IntPtr, ByVal id As Integer)
+
     Private Const Key_NONE As Integer = &H0
     Private Const Key_ALT As Integer = &H1
     Private Const Key_CTRL As Integer = &H2
     Private Const Key_SHIFT As Integer = &H4
     Private Const Key_WIN As Integer = &H8
+
     Private Const WM_HOTKEY As Integer = &H312
 
     Protected Overrides Sub WndProc(ByRef m As Message)
@@ -60,7 +62,15 @@ Public Class MainWindow
         Me.CB_autoHide.Checked = My.Settings.autoHideOn
         Me.CB_alwaysInForeground.Checked = My.Settings.alwaysOnTop
         Me.TopMost = My.Settings.alwaysOnTop
-        RegisterHotKey(Me.Handle, 1, Key_CTRL, Keys.F12)
+
+        Me.HotkeyModifiers_ALT_cb.Checked = My.Settings.HotkeyModifierALT_SET
+        Me.HotkeyModifiers_CTRL_cb.Checked = My.Settings.HotkeyModifierCTRL_SET
+        Me.HotkeyModifiers_WIN_cb.Checked = My.Settings.HotkeyModifierWIN_SET
+        Me.HotkeyModifiers_SHIFT_cb.Checked = My.Settings.HotkeyModifierSHIFT_SET
+        Me.HotkeyKey_cb.SelectedIndex = My.Settings.HotkeyKeyIndex
+
+        SetHotkey()
+
         If My.Settings.autoHideOn = True Then
             Me.Visible = False
             Me.MinimizeBox = False
@@ -69,6 +79,108 @@ Public Class MainWindow
             Me.ControlBox = True
             Me.MinimizeBox = True
         End If
+
+        Me.CheckForUpdatesLink.Text = My.Resources.UpdateURL
+        Me.VersionNumber_Label.Text = My.Resources.VersionNumberString
+    End Sub
+
+    Private Sub SetHotkey()
+        Dim hotkeyModifier As Integer = 0
+        Dim hotkeyKeyIndex As UInteger
+        Try
+            hotkeyKeyIndex = HotkeyKey_cb.SelectedIndex
+        Catch ex As OverflowException
+            Return
+        End Try
+        Dim hotkeyKeys As Keys() = {
+                                        Keys.A,
+                                        Keys.B,
+                                        Keys.C,
+                                        Keys.D,
+                                        Keys.E,
+                                        Keys.F,
+                                        Keys.G,
+                                        Keys.H,
+                                        Keys.I,
+                                        Keys.J,
+                                        Keys.K,
+                                        Keys.L,
+                                        Keys.M,
+                                        Keys.N,
+                                        Keys.O,
+                                        Keys.P,
+                                        Keys.Q,
+                                        Keys.R,
+                                        Keys.S,
+                                        Keys.T,
+                                        Keys.U,
+                                        Keys.V,
+                                        Keys.W,
+                                        Keys.X,
+                                        Keys.Y,
+                                        Keys.Z,
+                                        Keys.D1,
+                                        Keys.D2,
+                                        Keys.D3,
+                                        Keys.D4,
+                                        Keys.D5,
+                                        Keys.D6,
+                                        Keys.D7,
+                                        Keys.D8,
+                                        Keys.D9,
+                                        Keys.D0,
+                                        Keys.Delete,
+                                        Keys.Enter,
+                                        Keys.Back,
+                                        Keys.Space,
+                                        Keys.F1,
+                                        Keys.F2,
+                                        Keys.F3,
+                                        Keys.F4,
+                                        Keys.F5,
+                                        Keys.F6,
+                                        Keys.F7,
+                                        Keys.F8,
+                                        Keys.F9,
+                                        Keys.F10,
+                                        Keys.F11,
+                                        Keys.F12
+                                    }
+
+        If (HotkeyModifiers_CTRL_cb.Checked = True) Then
+            hotkeyModifier = hotkeyModifier Or Key_CTRL
+        Else
+            hotkeyModifier = hotkeyModifier And Not Key_CTRL
+        End If
+
+        If (HotkeyModifiers_ALT_cb.Checked = True) Then
+            hotkeyModifier = hotkeyModifier Or Key_ALT
+        Else
+            hotkeyModifier = hotkeyModifier And Not Key_ALT
+        End If
+
+        If (HotkeyModifiers_SHIFT_cb.Checked = True) Then
+            hotkeyModifier = hotkeyModifier Or Key_SHIFT
+        Else
+            hotkeyModifier = hotkeyModifier And Not Key_SHIFT
+        End If
+
+        If (HotkeyModifiers_WIN_cb.Checked = True) Then
+            hotkeyModifier = hotkeyModifier Or Key_WIN
+        Else
+            hotkeyModifier = hotkeyModifier And Not Key_WIN
+        End If
+
+        My.Settings.HotkeyModifierCTRL_SET = HotkeyModifiers_CTRL_cb.Checked
+        My.Settings.HotkeyModifierALT_SET = HotkeyModifiers_ALT_cb.Checked
+        My.Settings.HotkeyModifierSHIFT_SET = HotkeyModifiers_SHIFT_cb.Checked
+        My.Settings.HotkeyModifierWIN_SET = HotkeyModifiers_WIN_cb.Checked
+
+        RegisterHotKey(Me.Handle, 1, hotkeyModifier, hotkeyKeys(hotkeyKeyIndex))
+
+        My.Settings.HotkeyKeyIndex = hotkeyKeyIndex
+
+        My.Settings.Save()
     End Sub
 
     Private Sub MainWindow_FocusLost(sender As Object, e As EventArgs) Handles Me.Deactivate
@@ -172,4 +284,15 @@ Public Class MainWindow
         End If
         My.Settings.Save()
     End Sub
+
+    Private Sub CheckForUpdatesLink_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles CheckForUpdatesLink.LinkClicked
+        CheckForUpdatesBrowserWindow.Visible = False
+        CheckForUpdatesBrowserWindow.Visible = True
+        CheckForUpdatesLink.LinkVisited = True
+    End Sub
+
+    Private Sub ChangeHotkey_Btn_Click(sender As Object, e As EventArgs) Handles ChangeHotkey_Btn.Click
+        SetHotkey()
+    End Sub
+
 End Class

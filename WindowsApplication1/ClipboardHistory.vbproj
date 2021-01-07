@@ -168,6 +168,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="CheckForUpdatesBrowserView.Designer.vb">
+      <DependentUpon>CheckForUpdatesBrowserView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CheckForUpdatesBrowserView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CheckForUpdatesBrowserView.resx">
+      <DependentUpon>CheckForUpdatesBrowserView.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>

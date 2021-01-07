@@ -77,6 +77,66 @@ Namespace My
                 Me("autoHideOn") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HotkeyModifierCTRL_SET() As Boolean
+            Get
+                Return CType(Me("HotkeyModifierCTRL_SET"),Boolean)
+            End Get
+            Set
+                Me("HotkeyModifierCTRL_SET") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HotkeyModifierALT_SET() As Boolean
+            Get
+                Return CType(Me("HotkeyModifierALT_SET"),Boolean)
+            End Get
+            Set
+                Me("HotkeyModifierALT_SET") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HotkeyModifierSHIFT_SET() As Boolean
+            Get
+                Return CType(Me("HotkeyModifierSHIFT_SET"),Boolean)
+            End Get
+            Set
+                Me("HotkeyModifierSHIFT_SET") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property HotkeyModifierWIN_SET() As Boolean
+            Get
+                Return CType(Me("HotkeyModifierWIN_SET"),Boolean)
+            End Get
+            Set
+                Me("HotkeyModifierWIN_SET") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property HotkeyKeyIndex() As UInteger
+            Get
+                Return CType(Me("HotkeyKeyIndex"),UInteger)
+            End Get
+            Set
+                Me("HotkeyKeyIndex") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

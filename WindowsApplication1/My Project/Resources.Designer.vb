@@ -59,5 +59,23 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die https://www.github.com/Marc-Bender/ClipboardHistory/releases/latest ähnelt.
+        '''</summary>
+        Friend ReadOnly Property UpdateURL() As String
+            Get
+                Return ResourceManager.GetString("UpdateURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die V.0.2 ähnelt.
+        '''</summary>
+        Friend ReadOnly Property VersionNumberString() As String
+            Get
+                Return ResourceManager.GetString("VersionNumberString", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace
