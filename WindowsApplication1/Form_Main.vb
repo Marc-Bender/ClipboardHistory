@@ -17,15 +17,18 @@
         If m.Msg = Lib_Const_WM_HOTKEY Then
             Select Case m.WParam
                 Case 1 ' multiple hotkeys possible but only one needed yet
-                    Me.Visible = True
-                    Me.BringToFront()
-                    Me.Activate()
-                    Me.WindowState = FormWindowState.Normal
+                    helperFun_showSelector()
             End Select
         End If
         MyBase.WndProc(m)
     End Sub
 
+    Private Sub helperFun_showSelector()
+        Me.Visible = True
+        Me.BringToFront()
+        Me.Activate()
+        Me.WindowState = FormWindowState.Normal
+    End Sub
 
     Private Sub helperFun_clearClipboard()
         Clipboard.Clear()
@@ -48,9 +51,7 @@
 
     Private Sub HandlerFun_on_NotifyIcon1_MouseDown(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDown
         If e.Button = MouseButtons.Left Then
-            Me.Visible = True
-            Me.BringToFront()
-            Me.Activate()
+            helperFun_showSelector()
         ElseIf e.Button = MouseButtons.Middle Then
             helperFun_paste(ListBox_RecentClipboardEntries.Items.Item(0))
         Else
@@ -262,7 +263,7 @@
     End Sub
 
     Private Sub HandlerFun_on_TSMItem_showSelector_Click(sender As Object, e As EventArgs) Handles TSMItem_showSelector.Click
-        Me.Visible = True
+        helperFun_showSelector()
     End Sub
 
     Private Sub HandlerFun_on_CB_topMost_CheckedChanged(sender As Object, e As EventArgs) Handles CB_topMost.CheckedChanged
