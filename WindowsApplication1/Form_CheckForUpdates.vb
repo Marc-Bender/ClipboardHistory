@@ -2,13 +2,8 @@
 
 Public Class Form_CheckForUpdates
 
-    Private Sub HandlerFun_on_Btn_Ok_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub HandlerFun_on_Btn_Ok_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Btn_Ok.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
-    End Sub
-
-    Private Sub HandlerFun_on_Btn_Cancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 

@@ -88,7 +88,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die V.0.2 ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die V.0.2.2 ähnelt.
         '''</summary>
         Friend ReadOnly Property Str_VersionNumber() As String
             Get

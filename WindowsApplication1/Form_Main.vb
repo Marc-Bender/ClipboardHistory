@@ -20,6 +20,7 @@
                     Me.Visible = True
                     Me.BringToFront()
                     Me.Activate()
+                    Me.WindowState = FormWindowState.Normal
             End Select
         End If
         MyBase.WndProc(m)
