@@ -1,4 +1,5 @@
 ﻿Imports ClipboardHistory.md_ClipboardHistory_Helpers
+
 Public Class Form_Main
     Dim glob_Str_clipboardText As String
 
@@ -57,7 +58,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub HandlerFun_on_Btn_clearHistory_Click(sender As Object, e As EventArgs) Handles Btn_clearHistory.Click
-        Ifc_helperFun_clearClipboard()
+        Ifc_helperFun_clearHistory()
     End Sub
 
     Private Sub HandlerFun_on_Btn_clearClipboard_Click(sender As Object, e As EventArgs) Handles Btn_clearClipboard.Click
@@ -118,7 +119,7 @@ Public Class Form_Main
     End Sub
 
     Private Sub HandlerFun_on_TSMItem_showSelector_Click(sender As Object, e As EventArgs) Handles TSMItem_showSelector.Click
-        md_ClipboardHistory_Helpers.Ifc_helperFun_showSelector()
+        Ifc_helperFun_showSelector()
     End Sub
 
     Private Sub HandlerFun_on_CB_topMost_CheckedChanged(sender As Object, e As EventArgs) Handles CB_topMost.CheckedChanged
@@ -134,7 +135,6 @@ Public Class Form_Main
     End Sub
 
     Private Sub HandlerFun_on_Lbl_CheckForUpdatesLink_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles Lbl_CheckForUpdatesLink.LinkClicked
-        Form_CheckForUpdates.Visible = False
         Form_CheckForUpdates.Visible = True
         Lbl_CheckForUpdatesLink.LinkVisited = True
     End Sub
