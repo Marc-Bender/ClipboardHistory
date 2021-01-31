@@ -111,7 +111,7 @@ Partial Class Form_Main
         Me.ListBox_RecentClipboardEntries.Location = New System.Drawing.Point(12, 12)
         Me.ListBox_RecentClipboardEntries.Name = "ListBox_RecentClipboardEntries"
         Me.ListBox_RecentClipboardEntries.Size = New System.Drawing.Size(296, 95)
-        Me.ListBox_RecentClipboardEntries.TabIndex = 4
+        Me.ListBox_RecentClipboardEntries.TabIndex = 0
         '
         'Timer1
         '
@@ -142,7 +142,7 @@ Partial Class Form_Main
         Me.Lbl_CheckForUpdatesLink.Location = New System.Drawing.Point(12, 242)
         Me.Lbl_CheckForUpdatesLink.Name = "Lbl_CheckForUpdatesLink"
         Me.Lbl_CheckForUpdatesLink.Size = New System.Drawing.Size(299, 32)
-        Me.Lbl_CheckForUpdatesLink.TabIndex = 0
+        Me.Lbl_CheckForUpdatesLink.TabIndex = 4
         Me.Lbl_CheckForUpdatesLink.TabStop = True
         Me.Lbl_CheckForUpdatesLink.Text = "www.example.com"
         '

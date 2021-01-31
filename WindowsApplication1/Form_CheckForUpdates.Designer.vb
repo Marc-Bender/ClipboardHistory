@@ -34,7 +34,7 @@ Partial Class Form_CheckForUpdates
         Me.WebBrws_gitHubPage.Name = "WebBrws_gitHubPage"
         Me.WebBrws_gitHubPage.Size = New System.Drawing.Size(1152, 654)
         Me.WebBrws_gitHubPage.TabIndex = 1
-        Me.WebBrws_gitHubPage.Url = New System.Uri("https://www.github.com/Marc-Bender/ClipboardHistory/releases/latest", System.UriKind.Absolute)
+        Me.WebBrws_gitHubPage.Url = New System.Uri("about:blank", System.UriKind.Absolute)
         '
         'Btn_Ok
         '

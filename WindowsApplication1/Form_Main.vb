@@ -112,9 +112,10 @@ Public Class Form_Main
                 ListBox_RecentClipboardEntries.Items.RemoveAt(ListBox_RecentClipboardEntries.SelectedIndex)
             Catch ex As ArgumentOutOfRangeException
             End Try
-        End If
-        If e.KeyCode = Keys.Enter Then
+        ElseIf e.KeyCode = Keys.Enter Then
             Ifc_helperFun_paste(ListBox_RecentClipboardEntries.SelectedItem.ToString)
+        ElseIf e.KeyCode = Keys.Escape Then
+            Me.Hide()
         End If
     End Sub
 
